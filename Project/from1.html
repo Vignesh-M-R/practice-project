@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Online Registration From</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .error {
+            color: red;
+            font-style: italic;
+        }
+        
+        .box2 {
+            padding: 50px;
+        }
+        
+        .box-inp {
+            padding: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Online Registration form
+                </div>
+                <div class="box-inp">
+                    <form id="registration" action="success message.html">
+                        <p>Required fields<sup style="color:red">*</sup><small>(must fill)</small></p>
+                        <hr>
+                        <p>First Name:<sup style="color:red">*</sup></p>
+                        <input type="text" class="form-control" name="username" placeholder="Enter Your Firstname" required="true">
+                        <br>
+                        <p>Last Name:<sup style="color:red">*</sup></p>
+                        <input type="text" class="form-control" name="username" placeholder="Enter Your Lastname" required="true">
+                        <br>
+                        <p>Email Id:<sup style="color:red">*</sup></p>
+                        <input type="text" class="form-control" name="email" placeholder="Enter your Email-Id" required="true">
+                        <br>
+                        <p>Password:<sup style="color:red">*</sup></p>
+                        <input type="password" class="form-control" name="password" placeholder="Enter Password" id="password" required="true">
+                        <br>
+                        <p>Confirm Password:<sup style="color:red">*</sup></p>
+                        <input type="password" class="form-control" name="confirm" placeholder="Confirm Password" required="true">
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value == '' || value.trim().length != 0;
+        }, "No space please and don't leave it empty");
+        jQuery.validator.addMethod("customEmail", function(value, element) {
+            return this.optional(element) || /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
+        }, "Please enter valid email address!");
+        $.validator.addMethod("alphanumeric", function(value, element) {
+            return this.optional(element) || /^\w+$/i.test(value);
+        }, "Letters, numbers, and underscores only please");
+        var $registrationForm = $('#registration');
+        if ($registrationForm.length) {
+            $registrationForm.validate({
+                rules: {
+                    fname: {
+                        required: true,
+                        noSpace: true
+                    },
+                    lname: {
+                        required: true,
+                        noSpace: true
+                    },
+
+                    email: {
+                        required: true,
+                        customEmail: true
+                    },
+                    password: {
+                        required: true
+                    },
+                    confirm: {
+                        required: true,
+                        equalTo: '#password'
+                    },
+                },
+                messages: {
+                    fname: {
+                        required: 'Please enter first name!'
+                    },
+                    lname: {
+                        required: 'Please enter last name!'
+                    },
+                    email: {
+                        required: 'Please enter email!',
+                        email: 'Please enter valid email!'
+                    },
+                    password: {
+                        required: 'Please enter password!'
+                    },
+                    confirm: {
+                        required: 'Please enter confirm password!',
+                        equalTo: 'Please enter same password!'
+                    }
+                }
+
+            });
+        }
+
+    </script>
+</body>
+
+</html>
